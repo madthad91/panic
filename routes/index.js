@@ -9,7 +9,7 @@ var url = require("url");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
-  res.send('Expresssss');
+  res.send('Express');
 });
 
 router.get('/posts', function(req, res, next) {
