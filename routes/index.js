@@ -26,8 +26,8 @@ router.get('/sample',function(req,res,next){
 })
 
 router.get('/:hash', function(req,res){
-	const pathToFile = "./../shared/" + req.params.hash + ".json"
-	fs.readFile(pathToFile, 'utf8', (error,content)=> {
+	var pathToFile = "./../shared/" + req.params.hash + ".json"
+	fs.readFile(pathToFile, 'utf8', function(error,content) {
 		if (error){
 			return res.status(400).json({error: error});
 		} 
@@ -37,8 +37,8 @@ router.get('/:hash', function(req,res){
 });
 
 router.post('/save-link', function(req,res,next) {
-	const bodyParams = req.body['data'];
-	const { type, data, hash } = JSON.parse(bodyParams);
+	var bodyParams = req.body['data'];
+	var { type, data, hash } = JSON.parse(bodyParams);
 	saveData = JSON.stringify({
 		options: type,
 		data: data
@@ -46,8 +46,8 @@ router.post('/save-link', function(req,res,next) {
 	console.log(saveData);
 	var error = null;
 	if (hash && type && data){
-		const pathToFile = './../shared/'+hash+'.json';
-		fs.writeFile(pathToFile, saveData, (err)=> {
+		var pathToFile = './../shared/'+hash+'.json';
+		fs.writeFile(pathToFile, saveData, function(err) {
 			if (err) {
 				error = err;
 			}
