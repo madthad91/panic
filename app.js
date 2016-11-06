@@ -8,22 +8,22 @@ app.use(bodyParser.json());
 
 
 /* Config cors */
-app.use((req, res, next) => {
+app.use(function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
 
-let jsonParse = (body)=> {
+var jsonParse = function(body){
 	return JSON.parse(JSON.stringify(body));
 }
 
-app.get('/', (req,res)=> {
+app.get('/', function(req,res){
 	return res.json({'Ward': 'data'});
 });
 
-app.get('/:hash', (req,res)=> {
+app.get('/:hash', function(req,res){
 	const pathToFile = "./../shared/" + req.params.hash + ".json"
 	fs.readFile(pathToFile, 'utf8', (error,content)=> {
 		if (error){
@@ -34,7 +34,7 @@ app.get('/:hash', (req,res)=> {
 
 });
 
-app.post('/save-link', (req,res,next)=> {
+app.post('/save-link', function(req,res,next) {
 	const bodyParams = req.body['data'];
 	const { type, data, hash } = JSON.parse(bodyParams);
 	saveData = JSON.stringify({
@@ -42,7 +42,7 @@ app.post('/save-link', (req,res,next)=> {
 		data: data
 	});
 	console.log(saveData);
-	let error = null;
+	var error = null;
 	if (hash && type && data){
 		const pathToFile = './../shared/'+hash+'.json';
 		fs.writeFile(pathToFile, saveData, (err)=> {
@@ -60,6 +60,6 @@ app.post('/save-link', (req,res,next)=> {
 
 });
 
-app.listen(3000, ()=>{
+app.listen(3000, function(){
 	console.log("App listening on port 3000");
 });
