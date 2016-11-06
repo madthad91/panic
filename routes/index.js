@@ -38,7 +38,10 @@ router.get('/:hash', function(req,res){
 
 router.post('/save-link', function(req,res,next) {
 	var bodyParams = req.body['data'];
-	var { type, data, hash } = JSON.parse(bodyParams);
+	var ps= JSON.parse(bodyParams);
+	var type = ps["type"];
+	var data = ps["data"];
+	var hash = ps["hash"];
 	saveData = JSON.stringify({
 		options: type,
 		data: data
