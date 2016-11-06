@@ -60,6 +60,6 @@ app.post('/save-link', function(req,res,next) {
 
 });
 
-app.listen(80, function(){
+app.listen(8080, function(){
 	console.log("App listening on port 3000");
 });
