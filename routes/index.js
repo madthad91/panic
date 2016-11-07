@@ -36,7 +36,7 @@ router.get('/:hash', function(req,res){
 	// });
 	var collections = db.get().collection('hashes');
 	collections.find({ hash: req.params.hash }).toArray(function(err, data){
-		return res.json({'data': data});
+		return res.status(200).json({'data': data});
 	});
 
 });
